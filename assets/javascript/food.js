@@ -1,0 +1,1 @@
+var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
