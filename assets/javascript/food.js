@@ -16,17 +16,17 @@ function callAPI(event) {
     console.log(ingredientsEl.value);
 
     fetch(requestURL)
-    .then(function(response) {
+    .then(function(response) { // made API call, awaiting data response
         return response.json();
     })
-    .then(function (data) {
+    .then(function (data) { // API call complete, generate divs to display data response
         console.log(data);    
         recipeResults = data;
         if (recipeResults.length > 0){
             recipeResults.forEach(recipe => {
                 var recipeDiv = document.createElement("div");
-                recipeDiv.innerHTML = recipe?.title;
-               
+                recipeDiv.innerHTML = recipe.title;
+                // API call to retrieve recipe card image, attach to recipeDiv
                 var recipeCard = `https://api.spoonacular.com/recipes/${recipe.id}/card?apiKey=${foodApiKey}`;
                 fetch (recipeCard)
                 .then(function(recipeCardResponse) {
