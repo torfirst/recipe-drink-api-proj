@@ -5,7 +5,19 @@ var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
 var recipeResults = [];
 var displayResults = document.getElementById("results");
 
+function loadScript(src){
+    var el = document.createElement("script");
+    el.src = src;
+    document.body.appendChild(el);
+}
+
 function callAPI(event) {
+    if (inputs[i].checked = !inputs[i].checked) {
+        var drinkSearch = document.querySelector(".drinkSearch");
+        drinkSearch.removeAttribute(".hide");
+        loadScript()
+    }
+
     recipeResults = []; // resets the results
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
