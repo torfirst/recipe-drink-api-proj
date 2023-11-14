@@ -15,33 +15,24 @@
             <div class="hero-section-text">
               <h2>What's in your fridge?</h2>
               <h5>Create your perfect dinner</h5>
-                  <form class="search-form">
-                      <div class="foodSearch">
-                          <input id="ingredient drinks" type="text" placeholder="Search...">
-                          <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
-                      </div>
-              </form>
+              <br>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+              <form class="search-form">
+                <div class="foodSearch">
+                    <input id="ingredient" type="text" placeholder="Search...">
+                    <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+                <div class="drinkSearch hide">
+                    <input id="drinks" type="text" placeholder="Search...">
+                    <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
             </div>
           </div>  
-</nav>
-<br><br>
 
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-
-        <form class="search-form">
-            <div class="foodSearch">
-                <input id="ingredient" type="text" placeholder="Search...">
-                <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-            <div class="drinkSearch hide">
-                <input id="drinks" type="text" placeholder="Search...">
-                <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-        </form>
-    </nav>
     <div id="results"></div>
 
     <script src="./assets/javascript/food.js"></script>
