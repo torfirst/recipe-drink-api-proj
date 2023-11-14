@@ -7,21 +7,6 @@ const scriptElement = document.getElementById('script');
 var requestDrinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${drinksEl.value}`;
 var requestURL = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${foodApiKey}&ingredients=${ingredientsEl.value}&number=10&ignorePantry=false`;
 
-fetchData();
-changeScript();
-
-checkbox.addEventListener('change', changeScript);
-
-function changeScript() {
-    var scriptElement = document.getElementById('script');
-
-    if (checkbox.checked) {
-        scriptElement.src = './assets/javascript/drink.js';
-    } else {
-        scriptElement.src = './assets/javascript/food.js';
-    }
-}
-
 function fetchData() {
     const apiUrl = checkbox.checked ? requestDrinkUrl : requestURL;
 
@@ -43,7 +28,6 @@ function fetchData() {
 
 checkbox.addEventListener("change", function () {
     fetchData();
-    changeScript();
 });
 
 function callDrinkAPI(event) {
