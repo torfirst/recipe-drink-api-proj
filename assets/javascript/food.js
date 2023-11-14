@@ -10,27 +10,22 @@ function loadScript(src){
     el.src = src;
     document.body.appendChild(el);
 }
-const checkbox = document.querySelector('#myCheckbox');
+// const checkbox = document.querySelector('#checkbox');
 
-checkbox.addEventListener('change', function() {
-  // Check if the checkbox is checked
-  if (this.checked) {
-    // Execute code for when the checkbox is checked
-    // For example, switch to a different JavaScript file or make a different API call
-    // You can load a new JavaScript file dynamically using the `script` tag
-    // Or you can make a new API call using the appropriate method (e.g., fetch)
-  } else {
-    // Execute code for when the checkbox is unchecked
-    // For example, switch back to the original JavaScript file or make the original API call
-  }
-});
+// checkbox.addEventListener('change', function() {
+//   // Check if the checkbox is checked
+//   if (this.checked) {
+//     // Execute code for when the checkbox is checked
+//     // For example, switch to a different JavaScript file or make a different API call
+//     // You can load a new JavaScript file dynamically using the `script` tag
+//     // Or you can make a new API call using the appropriate method (e.g., fetch)
+//   } else {
+//     // Execute code for when the checkbox is unchecked
+//     // For example, switch back to the original JavaScript file or make the original API call
+//   }
+// });
 
 function callAPI(event) {
-    if (inputs[i].checked = !inputs[i].checked) {
-        var drinkSearch = document.querySelector(".drinkSearch");
-        drinkSearch.removeAttribute(".hide");
-        loadScript()
-    }
 
     recipeResults = []; // resets the results
     while (displayResults.firstChild) {
