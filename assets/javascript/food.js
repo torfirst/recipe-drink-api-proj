@@ -1,32 +1,60 @@
 
-var ingredientsEl = document.querySelector("#ingredient")
-var searchBtnEl = document.querySelector("#searchBtn")
 var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
+var ingredientsEl = document.querySelector("#ingredient")
+var drinksEl = document.getElementById("drinks")
+var searchBtnEl = document.querySelector("#searchBtn")
 var recipeResults = [];
 var displayResults = document.getElementById("results");
 const checkbox = document.getElementById('checkbox');
-var scriptElement = document.getElementById('script');
+const scriptElement = document.getElementById('script');
+var requestURL = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${foodApiKey}&ingredients=${ingredientsEl.value}&number=10&ignorePantry=false`;
+var requestDrinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${drinksEl.value}`;
 
 checkbox.addEventListener('change', changeScript);
+
+fetchData();
+changeScript();
 
 function changeScript() {
     var scriptElement = document.getElementById('script');
 
     if (checkbox.checked) {
-        scriptElement.src = './assets/javascript/drink.js'; 
+        scriptElement.src = './assets/javascript/drink.js';
     } else {
-        scriptElement.src = './assets/javascript/food.js'; 
+        scriptElement.src = './assets/javascript/food.js';
     }
 }
 
-function callAPI(event) {
+function fetchData() {
+    const apiUrl = checkbox.checked ? requestDrinkUrl : requestURL;
 
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('API response:', data);
+            // Process the data as needed
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+checkbox.addEventListener("change", function () {
+    fetchData();
+    changeScript();
+});
+
+function callAPI(event) {
     recipeResults = []; // resets the results
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
     event.preventDefault()
-    var requestURL = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${foodApiKey}&ingredients=${ingredientsEl.value}&number=10&ignorePantry=false`;
 
     console.log(ingredientsEl.value);
 
