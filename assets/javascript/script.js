@@ -12,29 +12,6 @@ var foodSearchEl = document.querySelector("#foodSearch")
 var drinkSearchEl = document.querySelector("#drinkSearch")
 var drinksEl = document.querySelector("#drinks")
 
-function fetchData() {
-    const apiUrl = checkbox.checked ? requestDrinkUrl : requestURL;
-
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('API response:', data);
-            // Process the data as needed
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-}
-
-checkbox.addEventListener("change", function () {
-    fetchData();
-});
-
 function callFoodAPI(event) {
     event.preventDefault()
     recipeResults = []; // resets the results
