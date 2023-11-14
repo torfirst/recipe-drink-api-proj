@@ -1,17 +1,17 @@
-var drinksEl = document.querySelector("#drinks")
-var searchBtnEl = document.querySelector("#searchBtn")
-var drinkResults = [];
-var displayResults = document.getElementById("results")
+
+var searchBtnEl = document.querySelector("#drinkSearchBtn")
+
+
 
 function callDrinkAPI(event) {
+    event.preventDefault()
     var requestURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinksEl.value}`;
 
     drinkResults = []; // resets the results
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
-    event.preventDefault()
-
+    
     console.log(drinksEl.value);
 
     fetch(requestURL)
