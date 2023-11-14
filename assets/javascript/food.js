@@ -73,3 +73,4 @@ function callAPI(event) {
 }
 
 searchBtnEl.addEventListener("click", callAPI);
+

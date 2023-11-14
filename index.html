@@ -10,32 +10,49 @@
 </head>
 
 <body>
-    <nav>
+    <nav id = "foodSearch" class="searchNav">
         <div class="hero-section">
             <div class="hero-section-text">
               <h2>What's in your fridge?</h2>
               <h5>Create your perfect dinner</h5>
-              <br>
-              <label class="switch">
-                <input id="checkbox" type="checkbox">
-                <span class="slider round"></span>
-              </label>
-              <form class="search-form">
-                <div class="foodSearch">
-                    <input id="ingredient" type="text" placeholder="Search...">
-                    <button id="searchBtn" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-                <div class="drinkSearch hide">
-                    <input id="drinks" type="text" placeholder="Search...">
-                    <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
+                  <form class="search-form">
+                      <div class="Search">
+                          <input id="ingredient" type="text" placeholder="Search...">
+                          <button id="foodSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+                      </div>
+              </form>
             </div>
           </div>  
+</nav>
+<nav id = "drinkSearch" class = "searchNav hide">
+    <div class="drink-hero-section">
+        <div class="hero-section-text">
+          <h2>What's in your fridge?</h2>
+          <h5>Find your perfect drink</h5>
+              <form class="search-form">
+                  <div class="Search">
+                      <input id="drink-ingredient" type="text" placeholder="Search...">
+                      <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+          </form>
+        </div>
+      </div>  
+</nav>
+<br><br>
 
+        <label class="switch">
+            <input id = "switchAPI" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+
+            <div class="drinkSearch hide">
+                <input id="drinks" type="text" placeholder="Search...">
+                <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+    </nav>
     <div id="results"></div>
 
-    <script id="script" src="./assets/javascript/food.js"></script>
+    <script src="./assets/javascript/script.js"></script>
 </body>
 
 </html>

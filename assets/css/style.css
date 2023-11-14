@@ -20,6 +20,10 @@ nav {
     padding: 2rem;
 }
 
+.hide {
+  display: none;
+}
+
 .hero-section {
     background: url("https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg") 50% no-repeat;
     background-size: cover;
@@ -43,6 +47,24 @@ nav {
 
 .hide {
     display: none;
+}
+
+.drink-hero-section {
+      background: url("/assets/images/cocktails.jpg") 50% no-repeat;
+    background-size: cover;
+    color: white;
+    text-shadow: 1px 1px 8px #000000;
+    height: 30vh;
+    text-align: center;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 /* The switch - the box around the slider */
