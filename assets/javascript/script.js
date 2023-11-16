@@ -25,32 +25,57 @@ function callFoodAPI(event) {
     console.log(ingredientsEl.value);
 
     fetch(requestURL)
-    .then(function(response) { // made API call, awaiting data response
-        return response.json();
-    })
-    .then(function (data) { // API call complete, generate divs to display data response
-        console.log(data);    
-        recipeResults = data;
-        if (recipeResults.length > 0){
-            recipeResults.forEach(recipe => {
-                var recipeDiv = document.createElement("div");
-                // API call to retrieve recipe card image, attach to recipeDiv
-                var recipeCard = `https://api.spoonacular.com/recipes/${recipe.id}/card?apiKey=${foodApiKey}`;
-                fetch (recipeCard)
-                .then(function(recipeCardResponse) {
-                    return recipeCardResponse.json();
+        .then(function (response) { // made API call, awaiting data response
+            return response.json();
+        })
+        .then(function (data) { // API call complete, generate divs to display data response
+            console.log(data);
+            recipeResults = data;
+
+            if (recipeResults.length > 0) {
+                recipeResults.forEach(recipe => {
+                    var recipeDiv = document.createElement("div");
+
+                    const missedIngredients = recipe.missedIngredientCount;
+                    // Calculate the ratio
+                    const totalIngredientsCount = recipe.missedIngredientCount + recipe.usedIngredientCount;
+                    const ratio = missedIngredients / totalIngredientsCount;
+
+                    // Check if values are valid (not undefined or null)
+                    if (missedIngredients !== undefined && totalIngredientsCount !== undefined) {
+                        // Calculate percentage
+                        const percentageValue = (missedIngredients / totalIngredientsCount) * 100;
+
+                        // Log or use the percentage values as needed
+                        console.log(`Percentage Value: ${percentageValue}%`);
+
+                        // Create an element to display the percentage
+                        var percentageElement = document.createElement("p");
+                        percentageElement.textContent = `You have ${percentageValue.toFixed(2)}% of the ingredients!`;
+
+                        // Append the percentage element to the recipeDiv
+                        recipeDiv.appendChild(percentageElement);
+                    } else {
+                        console.warn(`Recipe: ${recipe.title} has missing values`);
+                    }
+
+                    // API call to retrieve recipe card image, attach to recipeDiv
+                    var recipeCard = `https://api.spoonacular.com/recipes/${recipe.id}/card?apiKey=${foodApiKey}`;
+                    fetch(recipeCard)
+                        .then(function (recipeCardResponse) {
+                            return recipeCardResponse.json();
+                        })
+                        .then(function (res) {
+                            console.log(res);
+                            var displayRecipe = document.createElement("img");
+                            displayRecipe.classList.add("recipeCard");
+                            displayRecipe.src = res.url;
+                            recipeDiv.appendChild(displayRecipe);
+                            displayResults.appendChild(recipeDiv);
+                        })
                 })
-                .then(function(res){
-                    console.log(res);
-                    var displayRecipe = document.createElement("img");
-                    displayRecipe.classList.add("recipeCard");
-                    displayRecipe.src = res.url;
-                    recipeDiv.appendChild(displayRecipe); 
-                    displayResults.appendChild(recipeDiv);
-                })
-            })
-        }
-    })
+            }
+        })
 }
 
 function switchAPI() {
@@ -69,7 +94,7 @@ function callDrinkAPI(event) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
 
-    
+
     fetch(requestDrinkUrl)
         .then(response => {
             if (!response.ok) {

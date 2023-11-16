@@ -9,7 +9,7 @@ body {
 }
 
 h2 {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: sans-serif;
     font-size: 80px;
 }
 
@@ -60,7 +60,7 @@ nav {
 }
 
 .drink-hero-section {
-      background: url("/assets/images/cocktails.jpg") 50% no-repeat;
+    background: url("https://www.freepik.com/free-photo/fresh-cocktails-with-ice-lemon-lime-fruits-generative-ai_41060993.htm#query=cocktails&position=0&from_view=keyword&track=sph&uuid=74ca312a-c031-4ddf-b905-71c82e7771d4") 50% no-repeat;
     background-size: cover;
     color: white;
     text-shadow: 1px 1px 8px #000000;
