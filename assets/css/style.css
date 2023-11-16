@@ -15,7 +15,8 @@ h2 {
 
 @media screen and (max-width: 480px) {
     h2 {
-      font-size: 35px;
+      font-size: 50px;
+      margin-bottom: -20;
     }
   }
 
@@ -27,7 +28,7 @@ nav {
 
 .search-form {
     text-align: center;
-    padding: 2rem;
+    padding: 0.5rem;
 }
 
 .hide {
@@ -35,19 +36,21 @@ nav {
 }
 
 .hero-section {
-    background: url("https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg") 50% no-repeat;
+    background: url("../images/foods.jpg") 50% no-repeat;
     background-size: cover;
+    color: white;
+    text-shadow: 1px 1px 8px #000000;
     height: 30vh;
     text-align: center;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
     -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .hero-section .hero-section-text {
@@ -60,7 +63,7 @@ nav {
 }
 
 .drink-hero-section {
-    background: url("https://www.freepik.com/free-photo/fresh-cocktails-with-ice-lemon-lime-fruits-generative-ai_41060993.htm#query=cocktails&position=0&from_view=keyword&track=sph&uuid=74ca312a-c031-4ddf-b905-71c82e7771d4") 50% no-repeat;
+    background: url("../images/cocktails.jpg") 50% no-repeat;
     background-size: cover;
     color: white;
     text-shadow: 1px 1px 8px #000000;
@@ -149,6 +152,13 @@ input:checked+.slider:before {
     margin-top: 20px;
 }
 
+@media screen and (max-width: 480px) {
+    #API-Switch {
+    margin-bottom: 50px;
+    margin-top: 0px;
+    }
+  }
+
 #results {
     justify-content: center;
     text-align: center;
@@ -156,8 +166,24 @@ input:checked+.slider:before {
     font-size: 40px;
 }
 
+@media screen and (max-width: 480px) {
+    #results {
+      font-size: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
 .recipeCard {
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
     margin-bottom: 100px;
 }
+
+@media screen and (max-width: 480px) {
+    .recipeCard {
+    border: solid rgb(238, 153, 153) 1px;
+    border-radius: 1%;
+    margin-bottom: 10px;
+    }
+  }
