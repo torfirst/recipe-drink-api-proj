@@ -10,11 +10,13 @@ var displayResults = document.getElementById("results");
 var switchBtnEl = document.querySelector("#switchAPI")
 var foodSearchEl = document.querySelector("#foodSearch")
 var drinkSearchEl = document.querySelector("#drinkSearch")
-var drinksEl = document.querySelector("#drinks")
+var drinksEl = document.querySelector("#drink-ingredient")
+
 
 function callFoodAPI(event) {
     event.preventDefault()
     recipeResults = []; // resets the results
+    displayResults.textContent = ""
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
@@ -32,7 +34,6 @@ function callFoodAPI(event) {
         if (recipeResults.length > 0){
             recipeResults.forEach(recipe => {
                 var recipeDiv = document.createElement("div");
-                recipeDiv.innerHTML = recipe.title;
                 // API call to retrieve recipe card image, attach to recipeDiv
                 var recipeCard = `https://api.spoonacular.com/recipes/${recipe.id}/card?apiKey=${foodApiKey}`;
                 fetch (recipeCard)
@@ -42,6 +43,7 @@ function callFoodAPI(event) {
                 .then(function(res){
                     console.log(res);
                     var displayRecipe = document.createElement("img");
+                    displayRecipe.classList.add("recipeCard");
                     displayRecipe.src = res.url;
                     recipeDiv.appendChild(displayRecipe); 
                     displayResults.appendChild(recipeDiv);
@@ -59,13 +61,15 @@ function switchAPI() {
 }
 
 function callDrinkAPI(event) {
+    event.preventDefault()
+    displayResults.textContent = ""
     drinkResults = []; // resets the results
+    var requestDrinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${drinksEl.value}`;
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
 
-    event.preventDefault()
-
+    
     fetch(requestDrinkUrl)
         .then(response => {
             if (!response.ok) {
