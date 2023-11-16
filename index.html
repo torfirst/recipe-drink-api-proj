@@ -10,51 +10,58 @@
 </head>
 
 <body>
-
     <nav id="foodSearch" class="searchNav">
         <div class="hero-section">
             <div class="hero-section-text">
 
-              <h2>What's in your fridge?</h2>
-              <h5>Create your perfect dinner</h5>
-                  <form class="search-form">
-                      <div class="Search">
-                          <input id="ingredient" type="text" placeholder="pasta, eggs, etc...">
-                          <button id="foodSearchBtn" type="submit"><i class="fa fa-search"></i></button>
-                      </div>
-              </form>
+                <h2>What's in your fridge?</h2>
+                <h5>Create your perfect dinner</h5>
+                <form class="search-form">
+                    <div class="Search">
+                        <input id="ingredient" type="text" placeholder="pasta, eggs, etc...">
+                        <button id="foodSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
             </div>
-          </div>  
-</nav>
-<nav id = "drinkSearch" class = "searchNav hide">
-    <div class="drink-hero-section">
-        <div class="hero-section-text">
-          <h2>What's on your shelf?</h2>
-          <h5>Find your perfect drink</h5>
-              <form class="search-form">
-                  <div class="Search">
-                      <input id="drink-ingredient" type="text" placeholder="whiskey, vodka, etc...">
-                      <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
-                  </div>
-          </form>
         </div>
-      </div>  
-</nav>
-<br><br>
-    
-        <label id = "API-Switch" class="switch">
-            <input id = "switchAPI" type="checkbox">
-            <span class="slider round"></span>
-          </label>
-
-            <div class="drinkSearch hide">
-                <input id="drinks" type="text" placeholder="Search...">
-                <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+    </nav>
+    <nav id="drinkSearch" class="searchNav hide">
+        <div class="drink-hero-section">
+            <div class="hero-section-text">
+                <h2>What's on your shelf?</h2>
+                <h5>Find your perfect drink</h5>
+                <form class="search-form">
+                    <div class="Search">
+                        <input id="drink-ingredient" type="text" placeholder="whiskey, vodka, etc...">
+                        <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
             </div>
             
     <div id="results">Welcome to the recipe and drink finder!<br><br> Here you can find tons of recipes and drink suggestions using whatever ingredients you have available.<br><br> Just enter your ingredients into the searchbar and click the search button to find tons of possible options.<br><br>To find suggestions for cocktails, simply toggle the switch.</div>
   
         <script src="./assets/javascript/script.js"></script>
 </body>
+        </div>
+    </nav>
+    <br>
 
+    <label id="API-Switch" class="switch">
+        <input id="switchAPI" type="checkbox">
+        <span class="slider round"></span>
+    </label>
+
+    <div class="drinkSearch hide">
+        <input id="drinks" type="text" placeholder="Search...">
+        <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+
+    <div id="results">Welcome to the recipe and drink finder!<br><br> Here you can find tons of recipes and drink
+        suggestions using whatever ingredients you have available. <br>Just enter your ingredients into the searchbar
+        and click the search button to find tons of possible options.<br><br>To find suggestions for cocktails, simply
+        toggle the switch.
+    </div>
+
+    <script src="./assets/javascript/script.js"></script>
+</body>
 </html>
