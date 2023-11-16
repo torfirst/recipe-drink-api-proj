@@ -9,6 +9,12 @@ h2 {
     font-size: 80px;
 }
 
+@media screen and (max-width: 480px) {
+    h2 {
+      font-size: 35px;
+    }
+  }
+
 nav {
     background-color: rgb(226, 226, 226);
     padding: 2% 0px;
