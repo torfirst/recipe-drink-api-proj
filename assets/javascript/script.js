@@ -13,7 +13,6 @@ var drinkSearchEl = document.querySelector("#drinkSearch")
 var drinksEl = document.querySelector("#drink-ingredient")
 
 
-
 function callFoodAPI(event) {
     event.preventDefault()
     recipeResults = []; // resets the results
