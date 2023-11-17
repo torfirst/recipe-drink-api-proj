@@ -143,6 +143,32 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+.recipeCard {
+    border: solid rgb(238, 153, 153) 10px;
+    border-radius: 5%;
+    margin-bottom: 100px;
+}
+
+.drinkCard {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 25%;
+    background-color: rgb(224, 85, 85);
+    width: 50%;
+    padding: 20px;
+    border: solid rgb(238, 153, 153) 10px;
+    border-radius: 5%;
+    line-height: 1.5;
+
+    
+}
+
+.drinkImg {
+    margin: 50px;
+    border: solid rgb(238, 153, 153) 10px;
+    border-radius: 50%;
+}
+
 #API-Switch {
     text-align: center;
     margin-bottom: 100px;
@@ -152,6 +178,14 @@ input:checked+.slider:before {
     margin-top: 20px;
 }
 
+#results {
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 40px;
+}
+
+
 @media screen and (max-width: 480px) {
     #API-Switch {
     margin-bottom: 50px;
@@ -159,12 +193,7 @@ input:checked+.slider:before {
     }
   }
 
-#results {
-    justify-content: center;
-    text-align: center;
-    color: white;
-    font-size: 40px;
-}
+
 
 @media screen and (max-width: 480px) {
     #results {
@@ -173,12 +202,6 @@ input:checked+.slider:before {
       margin-right: 20px;
     }
   }
-
-.recipeCard {
-    border: solid rgb(238, 153, 153) 10px;
-    border-radius: 5%;
-    margin-bottom: 100px;
-}
 
 @media screen and (max-width: 480px) {
     .recipeCard {

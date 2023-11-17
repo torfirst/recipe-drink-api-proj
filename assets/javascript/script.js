@@ -89,13 +89,15 @@ function callDrinkAPI(event) {
     event.preventDefault()
     displayResults.textContent = ""
     drinkResults = []; // resets the results
-    var requestDrinkUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${drinksEl.value}`;
+    var drinkIngredients = drinksEl.value.split(' ').join('');
+    var ingredientUrl = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${drinkIngredients}`;
+    
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
 
 
-    fetch(requestDrinkUrl)
+    fetch(ingredientUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -104,12 +106,42 @@ function callDrinkAPI(event) {
         })
         .then(data => {
             console.log('API response:', data);
+            for (var i = 0; i < 10; i++) {
+                var drinkURL = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${data.drinks[i].strDrink}`;
+                fetch(drinkURL)
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        console.log('API response:', data);
+                        for (var i = 0; i < data.drinks.length; i++) {
+                            
+                            var drinkResult = document.createElement("div");
+                            drinkResult.classList.add("drinkCard");
+                            var drinkName = document.createElement("h2");
+                            drinkName.textContent = data.drinks[i].strDrink;
+                            drinkResult.appendChild(drinkName);
+                            var drinkImg = document.createElement("img");
+                            drinkImg.classList.add("drinkImg");
+                            drinkImg.src = data.drinks[i].strDrinkThumb;
+                            drinkResult.appendChild(drinkImg);
+                            var instructions = document.createElement("div");
+                            instructions.textContent = "Instructions: " + data.drinks[i].strInstructions;
+                            drinkResult.appendChild(instructions);
 
+                            for(var i = 1; i < 16; i++) {
+                                if (data.drinks[0][`strIngredient${i}`] !== null) {
+                                    var ingredients = document.createElement("li");
+                                    ingredients.textContent = data.drinks[0][`strMeasure${i}`] + ': ' + data.drinks[0][`strIngredient${i}`];
+                                    drinkResult.appendChild(ingredients);
+                                }}
+                            displayResults.appendChild(drinkResult);
+
+                        }})}
         })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-
 }
 
 
