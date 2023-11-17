@@ -203,6 +203,30 @@ input:checked+.slider:before {
     margin: 50px;
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 50%;
+    
+}
+
+.favoriteBtn {
+margin: 10px;
+text-align: start;
+background-color: rgb(218, 136, 28);
+color: white;
+border: solid rgb(150, 72, 72) 3px;
+cursor: pointer;
+}
+
+.favorite-section {
+    margin: 50px;
+    text-align: center;
+    justify-content: center;
+}
+
+#drinkFavoriteBtn {
+    font-size: 50px;
+    background-color: rgb(224, 85, 85);
+    border: solid rgb(238, 153, 153) 3px;
+    color: white;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 39.9375em) {
