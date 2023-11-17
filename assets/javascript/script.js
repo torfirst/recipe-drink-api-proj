@@ -22,7 +22,6 @@ function callFoodAPI(event) {
     } // clears result divs
     var requestURL = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${foodApiKey}&ingredients=${ingredientsEl.value}&number=10&ignorePantry=false`;
 
-    console.log(ingredientsEl.value);
 
     fetch(requestURL)
         .then(function (response) { // made API call, awaiting data response
@@ -43,17 +42,9 @@ function callFoodAPI(event) {
 
                     // Check if values are valid (not undefined or null)
                     if (missedIngredients !== undefined && totalIngredientsCount !== undefined) {
-                        // Calculate percentage
                         const percentageValue = (missedIngredients / totalIngredientsCount) * 100;
-
-                        // Log or use the percentage values as needed
-                        console.log(`Percentage Value: ${percentageValue}%`);
-
-                        // Create an element to display the percentage
                         var percentageElement = document.createElement("p");
                         percentageElement.textContent = `You have ${percentageValue.toFixed(2)}% of the ingredients!`;
-
-                        // Append the percentage element to the recipeDiv
                         recipeDiv.appendChild(percentageElement);
                     } else {
                         console.warn(`Recipe: ${recipe.title} has missing values`);
