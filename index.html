@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel=“stylesheet” href=“https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css” crossorigin=“anonymous”>
+    <link rel=“stylesheet” href=“https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css”
+        crossorigin=“anonymous”>
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
 </head>
@@ -14,11 +15,10 @@
     <nav id="foodSearch" class="searchNav">
         <div class="hero-section">
             <div class="hero-section-text">
-
                 <h2>What's in your fridge?</h2>
                 <h5>Create your perfect dinner</h5>
                 <form class="search-form">
-                    <div class="Search">
+                    <div class="search">
                         <input id="ingredient" type="text" placeholder="pasta, eggs, etc...">
                         <button id="foodSearchBtn" type="submit"><i class="fa fa-search"></i></button>
                     </div>
@@ -26,13 +26,14 @@
             </div>
         </div>
     </nav>
+
     <nav id="drinkSearch" class="searchNav hide">
         <div class="drink-hero-section">
             <div class="hero-section-text">
                 <h2>What's on your shelf?</h2>
                 <h5>Find your perfect drink</h5>
                 <form class="search-form">
-                    <div class="Search">
+                    <div class="search">
                         <input id="drink-ingredient" type="text" placeholder="whiskey, vodka, etc...">
                         <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
                     </div>
@@ -40,24 +41,31 @@
             </div>
         </div>
     </nav>
-    <br>
+
+    <button id="favorites-button" class="lead">❤ Favorites</button>
 
     <label id="API-Switch" class="switch">
         <input id="switchAPI" type="checkbox">
         <span class="slider round"></span>
+
     </label>
+
 
     <div class="drinkSearch hide">
         <input id="drinks" type="text" placeholder="Search...">
         <button id="drinkSearchBtn" type="submit"><i class="fa fa-search"></i></button>
     </div>
 
-    <div id="results">Welcome to the recipe and drink finder!<br><br> Here you can find tons of recipes and drink
-        suggestions using whatever ingredients you have available. <br>Just enter your ingredients into the searchbar
-        and click the search button to find tons of possible options.<br><br>To find suggestions for cocktails, simply
-        toggle the switch.
+    <div id="results">
+        <h3>Welcome to the recipe and drink finder!</h3>
+        <div class="lead"><br> Here you can find tons of recipes and drink suggestions using whatever ingredients you
+            have available. <br><br>Just enter your ingredients into the searchbar and click the search button to find
+            tons of possible options.<br><br>To find suggestions for cocktails, simply toggle the switch.
+        </div>
     </div>
-    <script src=“https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js” crossorigin=“anonymous”></script>
+    <script src=“https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js”
+        crossorigin=“anonymous”></script>
     <script src="./assets/javascript/script.js"></script>
 </body>
+
 </html>

@@ -15,15 +15,38 @@ h2 {
 
 @media screen and (max-width: 480px) {
     h2 {
-      font-size: 50px;
-      margin-bottom: -20;
+        font-size: 50px;
+        margin-bottom: -20;
     }
-  }
+}
 
 nav {
     background-color: rgb(224, 85, 85);
     padding: 2% 0px;
     text-align: center;
+}
+
+input {
+    padding: .25rem;
+    border-radius: 50px;
+    border: 1px solid;
+}
+
+input::placeholder {
+    padding: .25rem;
+}
+
+#foodSearchBtn {
+    border-radius: 5px;
+    padding: 0 .25rem;
+}
+
+#favorites-button {
+    border-radius: 10px;
+    padding: .1rem .2rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    float: right;
 }
 
 .search-form {
@@ -32,7 +55,7 @@ nav {
 }
 
 .hide {
-  display: none;
+    display: none;
 }
 
 .hero-section {
@@ -46,11 +69,11 @@ nav {
     display: -ms-flexbox;
     display: flex;
     -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .hero-section .hero-section-text {
@@ -73,11 +96,11 @@ nav {
     display: -ms-flexbox;
     display: flex;
     -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 /* The switch - the box around the slider */
@@ -146,7 +169,8 @@ input:checked+.slider:before {
 .recipeCard {
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
-    margin-bottom: 100px;
+    margin-bottom: 4rem;
+    width: 75%;
 }
 
 .drinkCard {
@@ -159,8 +183,6 @@ input:checked+.slider:before {
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
     line-height: 1.5;
-
-    
 }
 
 .drinkImg {
@@ -171,7 +193,7 @@ input:checked+.slider:before {
 
 #API-Switch {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 3rem;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -188,25 +210,25 @@ input:checked+.slider:before {
 
 @media screen and (max-width: 480px) {
     #API-Switch {
-    margin-bottom: 50px;
-    margin-top: 0px;
+        margin-bottom: 50px;
+        margin-top: 0px;
     }
-  }
+}
 
 
 
 @media screen and (max-width: 480px) {
     #results {
-      font-size: 20px;
-      margin-left: 20px;
-      margin-right: 20px;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
-  }
+}
 
 @media screen and (max-width: 480px) {
     .recipeCard {
-    border: solid rgb(238, 153, 153) 1px;
-    border-radius: 1%;
-    margin-bottom: 10px;
+        border: solid rgb(238, 153, 153) 1px;
+        border-radius: 1%;
+        margin-bottom: 10px;
     }
-  }
+}
