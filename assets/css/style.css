@@ -9,13 +9,14 @@ body {
     background-color: rgb(150, 72, 72);
 }
 
+/* The titles for the header and cards */
 h2 {
     font-size: 80px;
 }
 
 @media screen and (max-width: 480px) {
     h2 {
-      font-size: 50px;
+      font-size: 40px;
       margin-bottom: -20;
     }
   }
@@ -143,27 +144,62 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+/* The recipe cards for the food to spawn on */
 .recipeCard {
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
     margin-bottom: 100px;
 }
 
+@media screen and (max-width: 475px) {
+    .recipeCard {
+        margin-top: -6px;
+        margin-bottom: 50px;
+        margin-left: 0%;
+        margin-right: 0%;
+        background-color: rgb(224, 85, 85);
+        width: 84%;
+        padding: 20px;
+        border: solid rgb(238, 153, 153) 10px;
+        border-radius: 5%;
+        line-height: 1.5; 
+        font-size: 10px;
+    }
+}
+
+/* The drink cards for the drinks to spawn on */
 .drinkCard {
     margin-top: 50px;
     margin-bottom: 50px;
     margin-left: 25%;
+    margin-right: 25%;
     background-color: rgb(224, 85, 85);
     width: 50%;
     padding: 20px;
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
-    line-height: 1.5;
-
-    
+    line-height: 1.5; 
 }
 
+@media screen and (max-width: 475px) {
+    .drinkCard {
+        margin-top: -6px;
+        margin-bottom: 50px;
+        margin-left: 0%;
+        margin-right: 0%;
+        background-color: rgb(224, 85, 85);
+        width: 84%;
+        padding: 20px;
+        border: solid rgb(238, 153, 153) 10px;
+        border-radius: 5%;
+        line-height: 1.5; 
+        font-size: 10px;
+    }
+}
+
+/* The drink images */
 .drinkImg {
+    align-content: center;
     margin: 50px;
     border: solid rgb(238, 153, 153) 10px;
     border-radius: 50%;
@@ -193,14 +229,31 @@ cursor: pointer;
     cursor: pointer;
 }
 
+@media screen and (max-width: 39.9375em) {
+    .drinkImg {
+        align-items: center;
+        margin: 0px;
+        border: solid rgb(238, 153, 153) 10px;
+        border-radius: 50%;
+        width: 75%;
+    }
+}
+
 #API-Switch {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
     margin-left: auto;
     margin-right: auto;
     display: block;
     margin-top: 20px;
 }
+
+@media screen and (max-width: 480px) {
+    #API-Switch {
+    margin-bottom: 30px;
+    margin-top: 0px;
+    }
+  }
 
 #results {
     justify-content: center;
@@ -209,28 +262,9 @@ cursor: pointer;
     font-size: 40px;
 }
 
-
-@media screen and (max-width: 480px) {
-    #API-Switch {
-    margin-bottom: 50px;
-    margin-top: 0px;
-    }
-  }
-
-
-
 @media screen and (max-width: 480px) {
     #results {
       font-size: 20px;
-      margin-left: 20px;
-      margin-right: 20px;
     }
   }
 
-@media screen and (max-width: 480px) {
-    .recipeCard {
-    border: solid rgb(238, 153, 153) 1px;
-    border-radius: 1%;
-    margin-bottom: 10px;
-    }
-  }
