@@ -1,8 +1,8 @@
 
-var ingredientsEl = document.querySelector("#ingredient")
-var drinkIngredientsEl = document.querySelector("#drink-ingredient")
-var foodSearchBtnEl = document.querySelector("#foodSearchBtn")
-var drinkSearchBtnEl = document.querySelector("#drinkSearchBtn")
+var ingredientsEl = document.querySelector("#ingredient");
+var drinkIngredientsEl = document.querySelector("#drink-ingredient");
+var foodSearchBtnEl = document.querySelector("#foodSearchBtn");
+var drinkSearchBtnEl = document.querySelector("#drinkSearchBtn");
 var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
 var recipeResults = [];
 var drinkResults = [];
@@ -12,6 +12,11 @@ var foodSearchEl = document.querySelector("#foodSearch")
 var drinkSearchEl = document.querySelector("#drinkSearch")
 var drinksEl = document.querySelector("#drink-ingredient")
 var favoritesBtn = document.getElementById('#favorites-button')
+
+var favoriteBtnEl = document.querySelector("#drinkFavoriteBtn");
+var favoriteSectionEl = document.querySelector(".favorite-section");
+var favoriteDrinks = JSON.parse(localStorage.getItem("favorites")) || [];
+
 
 // favoritesBtn.addEventListener("click", displayFavorites);
 
@@ -38,7 +43,8 @@ function addToFavorites(item) {
 function callFoodAPI(event) {
     event.preventDefault()
     recipeResults = []; // resets the results
-    displayResults.textContent = ""
+    displayResults.textContent = "";
+    // favoriteSectionEl.textContent = ""; 
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
@@ -86,12 +92,6 @@ function callFoodAPI(event) {
                             recipeDiv.appendChild(displayRecipe);
                             displayResults.appendChild(recipeDiv);
                         })
-                    // var addToFavoritesBtn = document.createElement("button");
-                    // addToFavoritesBtn.textContent = "Add to Favorites";
-                    // addToFavoritesBtn.addEventListener("click", function () {
-                    //     addToFavorites(recipe);
-                    // });
-                    // recipeDiv.appendChild(addToFavoritesBtn);
                     displayResults.appendChild(recipeDiv);
                 })
             }
@@ -107,7 +107,8 @@ function switchAPI() {
 
 function callDrinkAPI(event) {
     event.preventDefault()
-    displayResults.textContent = ""
+    displayResults.textContent = "";
+    // favoriteSectionEl.textContent = "";
     drinkResults = []; // resets the results
     var drinkIngredients = drinksEl.value.split(' ').join('');
     var ingredientUrl = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${drinkIngredients}`;
@@ -137,25 +138,51 @@ function callDrinkAPI(event) {
                     })
                     .then(function (data) {
                         console.log('API response:', data);
-                        for (var i = 0; i < data.drinks.length; i++) {
+                        for (var j = 0; j < data.drinks.length; j++) {
 
                             var drinkResult = document.createElement("div");
                             drinkResult.classList.add("drinkCard");
+
+                            // var addToFavoritesBtn = document.createElement("button");
+                            // addToFavoritesBtn.textContent = "Add to Favorites";
+                            // addToFavoritesBtn.addEventListener("click", function () {
+                            //     addToFavorites(recipe);
+                            // });
+                            // recipeDiv.appendChild(addToFavoritesBtn);
+                            
+                            //start changes
+                            var favoriteBtn = document.createElement("button");
+                            favoriteBtn.classList.add("favoriteBtn");
+                            favoriteBtn.textContent = "Add to Favorites";
+                            favoriteBtn.addEventListener("click", function () {
+                                favoriteBtn.textContent = "Favorited!";
+                                var id = data.drinks[0].strDrink;
+                                if (!favoriteDrinks.includes(id)) {
+                                    favoriteDrinks.push(id)
+                                    localStorage.setItem("favorites", JSON.stringify(favoriteDrinks));
+                                }
+
+                            });
+                            drinkResult.appendChild(favoriteBtn);
+
+                            //end changes
                             var drinkName = document.createElement("h2");
-                            drinkName.textContent = data.drinks[i].strDrink;
+                            drinkName.textContent = data.drinks[j].strDrink;
                             drinkResult.appendChild(drinkName);
+
                             var drinkImg = document.createElement("img");
                             drinkImg.classList.add("drinkImg");
-                            drinkImg.src = data.drinks[i].strDrinkThumb;
+                            drinkImg.src = data.drinks[j].strDrinkThumb;
                             drinkResult.appendChild(drinkImg);
+
                             var instructions = document.createElement("div");
-                            instructions.textContent = "Instructions: " + data.drinks[i].strInstructions;
+                            instructions.textContent = "Instructions: " + data.drinks[j].strInstructions;
                             drinkResult.appendChild(instructions);
 
-                            for (var i = 1; i < 16; i++) {
-                                if (data.drinks[0][`strIngredient${i}`] !== null) {
+                            for (var k = 1; k < 16; k++) {
+                                if (data.drinks[0][`strIngredient${k}`] !== null) {
                                     var ingredients = document.createElement("li");
-                                    ingredients.textContent = data.drinks[0][`strMeasure${i}`] + ': ' + data.drinks[0][`strIngredient${i}`];
+                                    ingredients.textContent = data.drinks[0][`strMeasure${k}`] + ': ' + data.drinks[0][`strIngredient${k}`];
                                     drinkResult.appendChild(ingredients);
                                 }
                             }
@@ -173,6 +200,52 @@ function callDrinkAPI(event) {
         })
 }
 
+function callFavoriteDrinks() {
+    displayResults.textContent = "";
+    favoriteBtnEl.textContent = "";
+    for (var i = 0; i < favoriteDrinks.length; i++) {
+        var favoriteURL = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${favoriteDrinks[i]}`;
+        fetch(favoriteURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                console.log('API response:', data);
+                for (var j = 0; j < data.drinks.length; j++) {
+
+                    var drinkResult = document.createElement("div");
+                    drinkResult.classList.add("drinkCard");
+                    var drinkName = document.createElement("h2");
+                    drinkName.textContent = data.drinks[j].strDrink;
+                    drinkResult.appendChild(drinkName);
+                    var drinkImg = document.createElement("img");
+                    drinkImg.classList.add("drinkImg");
+                    drinkImg.src = data.drinks[j].strDrinkThumb;
+                    drinkResult.appendChild(drinkImg);
+                    var instructions = document.createElement("div");
+                    instructions.textContent = "Instructions: " + data.drinks[j].strInstructions;
+                    drinkResult.appendChild(instructions);
+
+                    for (var k = 1; k < 16; k++) {
+                        if (data.drinks[0][`strIngredient${k}`] !== null) {
+                            var ingredients = document.createElement("li");
+                            ingredients.textContent = data.drinks[0][`strMeasure${k}`] + ': ' + data.drinks[0][`strIngredient${k}`];
+                            drinkResult.appendChild(ingredients);
+                        }
+                    }
+                    displayResults.appendChild(drinkResult);
+
+                }
+            })
+    }
+}
+
+
+
 foodSearchBtnEl.addEventListener("click", callFoodAPI);
 drinkSearchBtnEl.addEventListener("click", callDrinkAPI);
 switchBtnEl.addEventListener("change", switchAPI);
+favoriteBtnEl.addEventListener("click", callFavoriteDrinks);
