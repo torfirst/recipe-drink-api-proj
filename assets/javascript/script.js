@@ -3,7 +3,8 @@ var ingredientsEl = document.querySelector("#ingredient");
 var drinkIngredientsEl = document.querySelector("#drink-ingredient");
 var foodSearchBtnEl = document.querySelector("#foodSearchBtn");
 var drinkSearchBtnEl = document.querySelector("#drinkSearchBtn");
-var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
+// var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
+var foodApiKey = "67e37184fd33458c9f7c099b52a99192";
 var recipeResults = [];
 var drinkResults = [];
 var displayResults = document.getElementById("results");
@@ -27,7 +28,7 @@ function callFoodAPI(event) {
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
-    var requestURL = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${foodApiKey}&ingredients=${ingredientsEl.value}&number=10&ignorePantry=false`;
+    var requestURL = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${foodApiKey}&ingredients=${ingredientsEl.value}&number=1&ignorePantry=false`;
 
 
     fetch(requestURL)
