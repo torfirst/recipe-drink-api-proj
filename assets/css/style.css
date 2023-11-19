@@ -42,14 +42,6 @@ input::placeholder {
     padding: 0 .25rem;
 }
 
-#favorites-button {
-    border-radius: 10px;
-    padding: .1rem .2rem;
-    margin-top: 1rem;
-    margin-right: 1rem;
-    float: right;
-}
-
 .search-form {
     text-align: center;
     padding: 0.5rem;
@@ -169,10 +161,52 @@ input:checked+.slider:before {
 
 /* The recipe cards for the food to spawn on */
 .recipeCard {
-    border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
     margin-bottom: 4rem;
     width: 75%;
+    position: relative;
+    display: inline-block;
+}
+
+.recipeCard img {
+    border-radius: 30px;
+    border: solid rgb(238, 153, 153) 10px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.foodfavoriteBtn {
+    padding: .4rem;
+    text-align: start;
+    background-color: rgb(238, 153, 153);
+    color: white;
+    border: solid white 3px;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 1rem;
+}
+
+#food-favorites-button, #drink-favorites-button {
+    margin-top: 1rem;
+    padding: .3rem;
+    border-radius: 10px;
+}
+
+.percentages {
+    margin-bottom: 1rem;
+}
+.foodsearchfavoriteBtn { 
+    position: absolute;
+    top: 3.5rem;
+    right: 1rem;
+    padding: .4rem;
+    text-align: start;
+    background-color: rgb(238, 153, 153);
+    color: white;
+    border: solid white 3px;
+    cursor: pointer;
+    border-radius: 15px;
 }
 
 @media screen and (max-width: 475px) {
@@ -230,27 +264,22 @@ input:checked+.slider:before {
     
 }
 
-.favoriteBtn {
-margin: 10px;
+.favoriteBtn { 
+margin-bottom: 2rem;
+padding: .4rem;
 text-align: start;
-background-color: rgb(218, 136, 28);
+background-color: rgb(238, 153, 153);
 color: white;
-border: solid rgb(150, 72, 72) 3px;
+border: solid white 3px;
 cursor: pointer;
+border-radius: 15px;
+float: right;
 }
 
 .favorite-section {
     margin: 50px;
     text-align: center;
     justify-content: center;
-}
-
-#drinkFavoriteBtn {
-    font-size: 50px;
-    background-color: rgb(224, 85, 85);
-    border: solid rgb(238, 153, 153) 3px;
-    color: white;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 39.9375em) {

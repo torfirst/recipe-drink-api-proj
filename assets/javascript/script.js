@@ -7,44 +7,23 @@ var foodApiKey = "ea483b863cdd433eb55d9222c3cc0c4d";
 var recipeResults = [];
 var drinkResults = [];
 var displayResults = document.getElementById("results");
-var switchBtnEl = document.querySelector("#switchAPI")
-var foodSearchEl = document.querySelector("#foodSearch")
-var drinkSearchEl = document.querySelector("#drinkSearch")
-var drinksEl = document.querySelector("#drink-ingredient")
-var favoritesBtn = document.getElementById('#favorites-button')
+var switchBtnEl = document.querySelector("#switchAPI");
+var foodSearchEl = document.querySelector("#foodSearch");
+var drinkSearchEl = document.querySelector("#drinkSearch");
+var drinksEl = document.querySelector("#drink-ingredient");
+var foodFavoritesBtn = document.getElementById('food-favorites-button')
 
-var favoriteBtnEl = document.querySelector("#drinkFavoriteBtn");
+var drinkFavoriteBtn = document.querySelector("#drink-favorites-button");
 var favoriteSectionEl = document.querySelector(".favorite-section");
-var favoriteDrinks = JSON.parse(localStorage.getItem("favorites")) || [];
 
-
-// favoritesBtn.addEventListener("click", displayFavorites);
-
-function addToFavorites(item) {
-    let favorites = localStorage.getItem('favorites') || [];
-    favorites.push(item);
-    localStorage.setItem('favorites', (favorites));
-}
-
-// function getFavorites() {
-//     return JSON.parse(localStorage.getItem('favorites')) || [];
-// }
-
-// function displayFavorites() {
-//     document.getElementById('favorites-button').innerHTML = '';
-//     displayResults.textContent = "";
-//     var favorites = getFavorites();
-//     console.log("Favorites:", favorites);
-//     storedFavorites.forEach(fav => {
-//    
-//       });
-// }
+var favoriteDrinks = JSON.parse(localStorage.getItem("drink-favorites")) || [];
+var favoriteFood = JSON.parse(localStorage.getItem("food-favorites")) || [];
 
 function callFoodAPI(event) {
     event.preventDefault()
     recipeResults = []; // resets the results
     displayResults.textContent = "";
-    // favoriteSectionEl.textContent = ""; 
+    favoriteSectionEl.textContent = "";
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
@@ -62,6 +41,7 @@ function callFoodAPI(event) {
             if (recipeResults.length > 0) {
                 recipeResults.forEach(recipe => {
                     var recipeDiv = document.createElement("div");
+                    recipeDiv.classList.add("recipeCard");
 
                     const missedIngredients = recipe.missedIngredientCount;
                     // Calculate the ratio
@@ -72,6 +52,7 @@ function callFoodAPI(event) {
                     if (missedIngredients !== undefined && totalIngredientsCount !== undefined) {
                         const percentageValue = (missedIngredients / totalIngredientsCount) * 100;
                         var percentageElement = document.createElement("p");
+                        percentageElement.classList.add("percentages");
                         percentageElement.textContent = `You have ${percentageValue.toFixed(2)}% of the ingredients!`;
                         recipeDiv.appendChild(percentageElement);
                     } else {
@@ -86,13 +67,28 @@ function callFoodAPI(event) {
                         })
                         .then(function (res) {
                             console.log(res);
+
+                            var favoriteBtn = document.createElement("button");
+                            favoriteBtn.classList.add("foodsearchfavoriteBtn");
+                            favoriteBtn.textContent = "Add to Favorites";
+                            favoriteBtn.addEventListener("click", function () {
+                                favoriteBtn.textContent = "Favorited!";
+                                var id = recipeResults[0].id;
+                                if (!favoriteFood.includes(id)) {
+                                    favoriteFood.push(id)
+                                    localStorage.setItem("food-favorites", JSON.stringify(favoriteFood));
+                                }
+                            })
+                            
+                            recipeDiv.appendChild(favoriteBtn);
+
                             var displayRecipe = document.createElement("img");
-                            displayRecipe.classList.add("recipeCard");
+                            displayRecipe.classList.add("recipe-img");
                             displayRecipe.src = res.url;
                             recipeDiv.appendChild(displayRecipe);
+
                             displayResults.appendChild(recipeDiv);
                         })
-                    displayResults.appendChild(recipeDiv);
                 })
             }
         })
@@ -108,7 +104,7 @@ function switchAPI() {
 function callDrinkAPI(event) {
     event.preventDefault()
     displayResults.textContent = "";
-    // favoriteSectionEl.textContent = "";
+    favoriteSectionEl.textContent = "";
     drinkResults = []; // resets the results
     var drinkIngredients = drinksEl.value.split(' ').join('');
     var ingredientUrl = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${drinkIngredients}`;
@@ -143,14 +139,6 @@ function callDrinkAPI(event) {
                             var drinkResult = document.createElement("div");
                             drinkResult.classList.add("drinkCard");
 
-                            // var addToFavoritesBtn = document.createElement("button");
-                            // addToFavoritesBtn.textContent = "Add to Favorites";
-                            // addToFavoritesBtn.addEventListener("click", function () {
-                            //     addToFavorites(recipe);
-                            // });
-                            // recipeDiv.appendChild(addToFavoritesBtn);
-                            
-                            //start changes
                             var favoriteBtn = document.createElement("button");
                             favoriteBtn.classList.add("favoriteBtn");
                             favoriteBtn.textContent = "Add to Favorites";
@@ -159,13 +147,13 @@ function callDrinkAPI(event) {
                                 var id = data.drinks[0].strDrink;
                                 if (!favoriteDrinks.includes(id)) {
                                     favoriteDrinks.push(id)
-                                    localStorage.setItem("favorites", JSON.stringify(favoriteDrinks));
+                                    localStorage.setItem("drink-favorites", JSON.stringify(favoriteDrinks));
                                 }
 
                             });
                             drinkResult.appendChild(favoriteBtn);
 
-                            //end changes
+
                             var drinkName = document.createElement("h2");
                             drinkName.textContent = data.drinks[j].strDrink;
                             drinkResult.appendChild(drinkName);
@@ -186,12 +174,6 @@ function callDrinkAPI(event) {
                                     drinkResult.appendChild(ingredients);
                                 }
                             }
-                            var addToFavoritesBtn = document.createElement("button");
-                            addToFavoritesBtn.textContent = "Add to Favorites";
-                            addToFavoritesBtn.addEventListener("click", function () {
-                                addToFavorites(data.drinks[i]);
-                            });
-                            drinkResult.appendChild(addToFavoritesBtn);
                             displayResults.appendChild(drinkResult);
 
                         }
@@ -200,9 +182,32 @@ function callDrinkAPI(event) {
         })
 }
 
+function callFavoriteFood() {
+    displayResults.textContent = "";
+    foodFavoritesBtn.textContent = "";
+    for (var i = 0; i < favoriteFood.length; i++) {
+        var favoriteFoodURL = `https://api.spoonacular.com/recipes/${favoriteFood[i]}/card?apiKey=${foodApiKey}`;
+        fetch(favoriteFoodURL)
+        .then(function (favoriteFoodURLResponse) {
+            return favoriteFoodURLResponse.json();
+        })
+        .then(function (res) {
+            console.log(res);
+            var recipeDiv = document.createElement("div");
+            recipeDiv.classList.add("recipeCard");
+            var displayRecipe = document.createElement("img");
+            displayRecipe.classList.add("recipe-img");
+            displayRecipe.src = res.url;
+            recipeDiv.appendChild(displayRecipe);
+
+            displayResults.appendChild(recipeDiv);
+            })
+    }
+}
+
 function callFavoriteDrinks() {
     displayResults.textContent = "";
-    favoriteBtnEl.textContent = "";
+    drinkFavoriteBtn.textContent = "";
     for (var i = 0; i < favoriteDrinks.length; i++) {
         var favoriteURL = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${favoriteDrinks[i]}`;
         fetch(favoriteURL)
@@ -248,4 +253,5 @@ function callFavoriteDrinks() {
 foodSearchBtnEl.addEventListener("click", callFoodAPI);
 drinkSearchBtnEl.addEventListener("click", callDrinkAPI);
 switchBtnEl.addEventListener("change", switchAPI);
-favoriteBtnEl.addEventListener("click", callFavoriteDrinks);
+drinkFavoriteBtn.addEventListener("click", callFavoriteDrinks);
+foodFavoritesBtn.addEventListener("click", callFavoriteFood);
