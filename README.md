@@ -38,10 +38,10 @@ Once website is deployed, insert link here
 
 ## Website Screenshot
 
-![Food Main Page Screenshot](<Screenshot (1150).png>)
+![Food Main Page Screenshot](./assets/images/Screenshot%20(1150).png)
 
-![Food Seacrh Page Screenshot](<Screenshot (1152).png>)
+![Food Search Page Screenshot](./assets/images/Screenshot%20(1152).png)
 
-![Drink Main Page Screenshot](<Screenshot (1151).png>)
+![Drink Main Page Screenshot](./assets/images/Screenshot%20(1151).png)
 
-![Drink Seacrh Page Screenshot](<Screenshot (1153).png>)
+![Drink Seacrh Page Screenshot](./assets/images/Screenshot%20(1153).png)

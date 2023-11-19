@@ -11,11 +11,13 @@ var switchBtnEl = document.querySelector("#switchAPI");
 var foodSearchEl = document.querySelector("#foodSearch");
 var drinkSearchEl = document.querySelector("#drinkSearch");
 var drinksEl = document.querySelector("#drink-ingredient");
-var favoriteBtnEl = document.querySelector("#drinkFavoriteBtn");
+var foodFavoritesBtn = document.getElementById('food-favorites-button')
+
+var drinkFavoriteBtn = document.querySelector("#drink-favorites-button");
 var favoriteSectionEl = document.querySelector(".favorite-section");
 
-var favoriteDrinks = JSON.parse(localStorage.getItem("favorites")) || [];
-
+var favoriteDrinks = JSON.parse(localStorage.getItem("drink-favorites")) || [];
+var favoriteFood = JSON.parse(localStorage.getItem("food-favorites")) || [];
 
 function callFoodAPI(event) {
     event.preventDefault()
@@ -39,6 +41,7 @@ function callFoodAPI(event) {
             if (recipeResults.length > 0) {
                 recipeResults.forEach(recipe => {
                     var recipeDiv = document.createElement("div");
+                    recipeDiv.classList.add("recipeCard");
 
                     const missedIngredients = recipe.missedIngredientCount;
                     // Calculate the ratio
@@ -49,6 +52,7 @@ function callFoodAPI(event) {
                     if (missedIngredients !== undefined && totalIngredientsCount !== undefined) {
                         const percentageValue = (missedIngredients / totalIngredientsCount) * 100;
                         var percentageElement = document.createElement("p");
+                        percentageElement.classList.add("percentages");
                         percentageElement.textContent = `You have ${percentageValue.toFixed(2)}% of the ingredients!`;
                         recipeDiv.appendChild(percentageElement);
                     } else {
@@ -63,10 +67,26 @@ function callFoodAPI(event) {
                         })
                         .then(function (res) {
                             console.log(res);
+
+                            var favoriteBtn = document.createElement("button");
+                            favoriteBtn.classList.add("foodsearchfavoriteBtn");
+                            favoriteBtn.textContent = "Add to Favorites";
+                            favoriteBtn.addEventListener("click", function () {
+                                favoriteBtn.textContent = "Favorited!";
+                                var id = recipeResults[0].id;
+                                if (!favoriteFood.includes(id)) {
+                                    favoriteFood.push(id)
+                                    localStorage.setItem("food-favorites", JSON.stringify(favoriteFood));
+                                }
+                            })
+                            
+                            recipeDiv.appendChild(favoriteBtn);
+
                             var displayRecipe = document.createElement("img");
-                            displayRecipe.classList.add("recipeCard");
+                            displayRecipe.classList.add("recipe-img");
                             displayRecipe.src = res.url;
                             recipeDiv.appendChild(displayRecipe);
+
                             displayResults.appendChild(recipeDiv);
                         })
                 })
@@ -88,7 +108,7 @@ function callDrinkAPI(event) {
     drinkResults = []; // resets the results
     var drinkIngredients = drinksEl.value.split(' ').join('');
     var ingredientUrl = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${drinkIngredients}`;
-    
+
     while (displayResults.firstChild) {
         displayResults.removeChild(displayResults.firstChild);
     } // clears result divs
@@ -108,28 +128,28 @@ function callDrinkAPI(event) {
                 fetch(drinkURL)
                     .then(response => {
                         if (!response.ok) {
-                        throw new Error(`Network response was not ok: ${response.statusText}`);
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
                         }
                         return response.json();
                     })
                     .then(function (data) {
                         console.log('API response:', data);
                         for (var j = 0; j < data.drinks.length; j++) {
-                            
+
                             var drinkResult = document.createElement("div");
                             drinkResult.classList.add("drinkCard");
 
                             var favoriteBtn = document.createElement("button");
                             favoriteBtn.classList.add("favoriteBtn");
                             favoriteBtn.textContent = "Add to Favorites";
-                            favoriteBtn.addEventListener("click", function() {
-				                favoriteBtn.textContent = "Favorited!";
+                            favoriteBtn.addEventListener("click", function () {
+                                favoriteBtn.textContent = "Favorited!";
                                 var id = data.drinks[0].strDrink;
                                 if (!favoriteDrinks.includes(id)) {
                                     favoriteDrinks.push(id)
-                                    localStorage.setItem("favorites", JSON.stringify(favoriteDrinks));
+                                    localStorage.setItem("drink-favorites", JSON.stringify(favoriteDrinks));
                                 }
-                                
+
                             });
                             drinkResult.appendChild(favoriteBtn);
 
@@ -147,22 +167,48 @@ function callDrinkAPI(event) {
                             instructions.textContent = "Instructions: " + data.drinks[j].strInstructions;
                             drinkResult.appendChild(instructions);
 
-                            for(var k = 1; k < 16; k++) {
+                            for (var k = 1; k < 16; k++) {
                                 if (data.drinks[0][`strIngredient${k}`] !== null) {
                                     var ingredients = document.createElement("li");
                                     ingredients.textContent = data.drinks[0][`strMeasure${k}`] + ': ' + data.drinks[0][`strIngredient${k}`];
                                     drinkResult.appendChild(ingredients);
-                                }}
+                                }
+                            }
                             displayResults.appendChild(drinkResult);
 
-                        }})}
+                        }
+                    })
+            }
         })
+}
+
+function callFavoriteFood() {
+    displayResults.textContent = "";
+    foodFavoritesBtn.textContent = "";
+    for (var i = 0; i < favoriteFood.length; i++) {
+        var favoriteFoodURL = `https://api.spoonacular.com/recipes/${favoriteFood[i]}/card?apiKey=${foodApiKey}`;
+        fetch(favoriteFoodURL)
+        .then(function (favoriteFoodURLResponse) {
+            return favoriteFoodURLResponse.json();
+        })
+        .then(function (res) {
+            console.log(res);
+            var recipeDiv = document.createElement("div");
+            recipeDiv.classList.add("recipeCard");
+            var displayRecipe = document.createElement("img");
+            displayRecipe.classList.add("recipe-img");
+            displayRecipe.src = res.url;
+            recipeDiv.appendChild(displayRecipe);
+
+            displayResults.appendChild(recipeDiv);
+            })
+    }
 }
 
 function callFavoriteDrinks() {
     displayResults.textContent = "";
-    favoriteBtnEl.textContent = "";
-    for (var i = 0; i <favoriteDrinks.length; i++) {
+    drinkFavoriteBtn.textContent = "";
+    for (var i = 0; i < favoriteDrinks.length; i++) {
         var favoriteURL = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${favoriteDrinks[i]}`;
         fetch(favoriteURL)
             .then(response => {
@@ -174,7 +220,7 @@ function callFavoriteDrinks() {
             .then(function (data) {
                 console.log('API response:', data);
                 for (var j = 0; j < data.drinks.length; j++) {
-                    
+
                     var drinkResult = document.createElement("div");
                     drinkResult.classList.add("drinkCard");
                     var drinkName = document.createElement("h2");
@@ -188,20 +234,24 @@ function callFavoriteDrinks() {
                     instructions.textContent = "Instructions: " + data.drinks[j].strInstructions;
                     drinkResult.appendChild(instructions);
 
-                    for(var k = 1; k < 16; k++) {
+                    for (var k = 1; k < 16; k++) {
                         if (data.drinks[0][`strIngredient${k}`] !== null) {
                             var ingredients = document.createElement("li");
                             ingredients.textContent = data.drinks[0][`strMeasure${k}`] + ': ' + data.drinks[0][`strIngredient${k}`];
                             drinkResult.appendChild(ingredients);
-                        }}
+                        }
+                    }
                     displayResults.appendChild(drinkResult);
 
-                }})}
+                }
+            })
+    }
 }
-        
-        
+
+
 
 foodSearchBtnEl.addEventListener("click", callFoodAPI);
 drinkSearchBtnEl.addEventListener("click", callDrinkAPI);
 switchBtnEl.addEventListener("change", switchAPI);
-favoriteBtnEl.addEventListener("click", callFavoriteDrinks);
+drinkFavoriteBtn.addEventListener("click", callFavoriteDrinks);
+foodFavoritesBtn.addEventListener("click", callFavoriteFood);

@@ -19,12 +19,27 @@ h2 {
       font-size: 40px;
       margin-bottom: -20;
     }
-  }
+}
 
 nav {
     background-color: rgb(224, 85, 85);
     padding: 2% 0px;
     text-align: center;
+}
+
+input {
+    padding: .25rem;
+    border-radius: 50px;
+    border: 1px solid;
+}
+
+input::placeholder {
+    padding: .25rem;
+}
+
+#foodSearchBtn {
+    border-radius: 5px;
+    padding: 0 .25rem;
 }
 
 .search-form {
@@ -33,7 +48,7 @@ nav {
 }
 
 .hide {
-  display: none;
+    display: none;
 }
 
 .hero-section {
@@ -47,11 +62,11 @@ nav {
     display: -ms-flexbox;
     display: flex;
     -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .hero-section .hero-section-text {
@@ -74,11 +89,11 @@ nav {
     display: -ms-flexbox;
     display: flex;
     -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 /* The switch - the box around the slider */
@@ -146,9 +161,52 @@ input:checked+.slider:before {
 
 /* The recipe cards for the food to spawn on */
 .recipeCard {
-    border: solid rgb(238, 153, 153) 10px;
     border-radius: 5%;
-    margin-bottom: 100px;
+    margin-bottom: 4rem;
+    width: 75%;
+    position: relative;
+    display: inline-block;
+}
+
+.recipeCard img {
+    border-radius: 30px;
+    border: solid rgb(238, 153, 153) 10px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.foodfavoriteBtn {
+    padding: .4rem;
+    text-align: start;
+    background-color: rgb(238, 153, 153);
+    color: white;
+    border: solid white 3px;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 1rem;
+}
+
+#food-favorites-button, #drink-favorites-button {
+    margin-top: 1rem;
+    padding: .3rem;
+    border-radius: 10px;
+}
+
+.percentages {
+    margin-bottom: 1rem;
+}
+.foodsearchfavoriteBtn { 
+    position: absolute;
+    top: 3.5rem;
+    right: 1rem;
+    padding: .4rem;
+    text-align: start;
+    background-color: rgb(238, 153, 153);
+    color: white;
+    border: solid white 3px;
+    cursor: pointer;
+    border-radius: 15px;
 }
 
 @media screen and (max-width: 475px) {
@@ -206,27 +264,22 @@ input:checked+.slider:before {
     
 }
 
-.favoriteBtn {
-margin: 10px;
+.favoriteBtn { 
+margin-bottom: 2rem;
+padding: .4rem;
 text-align: start;
-background-color: rgb(218, 136, 28);
+background-color: rgb(238, 153, 153);
 color: white;
-border: solid rgb(150, 72, 72) 3px;
+border: solid white 3px;
 cursor: pointer;
+border-radius: 15px;
+float: right;
 }
 
 .favorite-section {
     margin: 50px;
     text-align: center;
     justify-content: center;
-}
-
-#drinkFavoriteBtn {
-    font-size: 50px;
-    background-color: rgb(224, 85, 85);
-    border: solid rgb(238, 153, 153) 3px;
-    color: white;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 39.9375em) {
@@ -241,7 +294,7 @@ cursor: pointer;
 
 #API-Switch {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -266,5 +319,5 @@ cursor: pointer;
     #results {
       font-size: 20px;
     }
-  }
+}
 
