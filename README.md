@@ -34,14 +34,14 @@ WHEN THE website is pushed out and works with ease
 
 ## Deployed URL
 
-Once website is deployed, insert link here
+https://torfirst.github.io/recipe-drink-api-proj/
 
 ## Website Screenshot
 
-![Food Main Page Screenshot](./assets/images/Screenshot%20(1150).png)
+![Food Main Page Screenshot](<./assets/images/Screenshot%20(1150).png>)
 
-![Food Search Page Screenshot](./assets/images/Screenshot%20(1152).png)
+![Food Search Page Screenshot](<./assets/images/Screenshot%20(1152).png>)
 
-![Drink Main Page Screenshot](./assets/images/Screenshot%20(1151).png)
+![Drink Main Page Screenshot](<./assets/images/Screenshot%20(1151).png>)
 
-![Drink Seacrh Page Screenshot](./assets/images/Screenshot%20(1153).png)
+![Drink Seacrh Page Screenshot](<./assets/images/Screenshot%20(1153).png>)
